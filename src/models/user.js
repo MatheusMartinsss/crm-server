@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const {v4} = require('uuid')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -14,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
     sequelize,
     tableName: 'users',
     modelName: 'user'
-  });
+  },);
+  User.beforeCreate(user => user.id = v4())
   return User;
 };
