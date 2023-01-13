@@ -1,5 +1,12 @@
-const { findAll } = require('../../infra/repositorys/users-repository')
-module.exports = createUserRouter = async (req, res) => {
-    const users = await findAll()
-    return res.status(201).send(users)
+const createUserUseCase = require('../../domain/useCases/create-user-useCase')
+const httpResponse = require('../../utils/helpers/http-helper')
+module.exports = createUserRouter = async (request) => {
+    try {
+        console.log(request)
+        const user = await createUserUseCase(request.body)
+        return httpResponse.ok(user)
+    } catch (error) {
+        console.log(error)
+        return httpResponse.serverError(error)
+    }
 }
