@@ -1,4 +1,5 @@
 module.exports = {
     emailAlreadyInUse: 'emailAlreadyInUse',
-    serverError: 'serverError'
+    serverError: 'serverError',
+    missingParamError: 'missingParamError'
 }
