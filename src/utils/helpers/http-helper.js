@@ -2,32 +2,45 @@ module.exports = class httpResponse {
     static badRequest(error) {
         return {
             statusCode: 400,
-            body: error
+            body: {
+                error: error.name,
+                message: error.message
+            }
         }
     }
     static forbidden(error) {
         return {
             statusCode: 403,
-            body: error
+            body: {
+                error: error.name,
+                message: error.message
+            }
         }
     }
     static unauthorized() {
         return {
             statusCode: 401,
-            //body: new Unauthorized()
+            body: {
+                error: error.name,
+                message: error.message
+            }
         }
     }
     static notFound(error) {
         return {
             statusCode: 404,
-            body: error
+            body: {
+                error: error.name,
+                message: error.message
+            }
         }
     }
     static serverError(error) {
         return {
             statusCode: 500,
             body: {
-              //  error: new SeverError(error),
+                error: error.name,
+                message: error.message
             }
         }
     }
