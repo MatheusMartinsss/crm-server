@@ -1,12 +1,12 @@
-const { user } = require('../../models/')
+const { User } = require('../../models/')
 const { NotFoundError } = require('../../utils/helpers/errors')
 
 const create = async (data) => {
-    const _user = await user.create(data)
+    const _user = await User.create(data)
     return _user
 }
 const findByEmail = async (email) => {
-    const _user = await user.findOne({
+    const _user = await User.findOne({
         where: {
             email: email
         }
@@ -14,14 +14,14 @@ const findByEmail = async (email) => {
     return _user
 }
 const findAll = async () => {
-    const users = await user.findAll({
+    const users = await User.findAll({
         attributes: { exclude: ['password'] },
         order: [['createdAt', 'DESC']]
     })
     return users
 }
 const findById = async (id) => {
-    const _user = await user.findOne({
+    const _user = await User.findOne({
         where: {
             id
         }
@@ -29,7 +29,7 @@ const findById = async (id) => {
     return _user
 }
 const updateUser = async (id, body) => {
-    const _user = await user.findOne({
+    const _user = await User.findOne({
         where: {
             id
         }
