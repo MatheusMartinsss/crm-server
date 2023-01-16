@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const {v4} = require('uuid')
+const { v4 } = require('uuid')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,12 +12,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsTo(models.Roles, { foreignKey: 'role', as: 'Role' })
     }
   }
   User.init({
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    token: DataTypes.STRING(1000),
+    role: DataTypes.STRING
   }, {
     sequelize,
     tableName: 'users',
