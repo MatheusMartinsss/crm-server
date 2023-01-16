@@ -13,13 +13,24 @@ const findByEmail = async (email) => {
     return _user
 }
 const findAll = async () => {
-    const users = await user.findAll()
+    const users = await user.findAll({
+        attributes: { exclude: ['password'] },
+        order: [['createdAt', 'DESC']]
+    })
     return users
 }
-
+const findById = async (id) => {
+    const _user = await user.findOne({
+        where: {
+            id
+        }
+    })
+    return _user
+}
 
 module.exports = {
     create,
     findAll,
-    findByEmail
+    findByEmail,
+    findById
 }
