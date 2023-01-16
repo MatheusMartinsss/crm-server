@@ -17,7 +17,7 @@ module.exports = class httpResponse {
             }
         }
     }
-    static unauthorized() {
+    static unauthorized(error) {
         return {
             statusCode: 401,
             body: {
