@@ -39,8 +39,8 @@ module.exports = class httpResponse {
         return {
             statusCode: 500,
             body: {
-                error: error.name,
-                message: error.message
+                error: error?.name,
+                message: error?.message
             }
         }
     }
