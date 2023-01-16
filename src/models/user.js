@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     tableName: 'users',
-    modelName: 'user'
+    modelName: 'User'
   },);
   User.beforeCreate(user => user.id = v4())
   return User;
