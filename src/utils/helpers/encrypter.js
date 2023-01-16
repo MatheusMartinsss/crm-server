@@ -10,10 +10,10 @@ const encrypt = async (password) => {
     return encrypted
 }
 const compare = async (password, hash) => {
-    if (password) {
+    if (!password) {
         throw new MissingParamError('password')
     }
-    if (hash) {
+    if (!hash) {
         throw new MissingParamError('hash')
     }
     const isValid = await bcrypt.compare(password.toString(), hash)
