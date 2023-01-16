@@ -3,7 +3,7 @@ const { EmailAlreadyInUse, MissingParamError } = require('../../utils/helpers/er
 const { encrypt } = require('../../utils/helpers/encrypter')
 module.exports = createUserUseCase = async (body) => {
     const verifyEmailAlreadyInUse = await findByEmail(body.email)
-    const requiredFields = ['email', 'password', 'confirmPassword', 'name']
+    const requiredFields = ['email', 'password', 'name']
     if (verifyEmailAlreadyInUse) {
         throw new EmailAlreadyInUse(body.email)
     }
