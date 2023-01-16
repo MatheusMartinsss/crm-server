@@ -1,4 +1,5 @@
 const { user } = require('../../models/')
+const { NotFoundError } = require('../../utils/helpers/errors')
 
 const create = async (data) => {
     const _user = await user.create(data)
@@ -27,10 +28,24 @@ const findById = async (id) => {
     })
     return _user
 }
+const updateUser = async (id, body) => {
+    const _user = await user.findOne({
+        where: {
+            id
+        }
+    })
+    if (!_user) throw new NotFoundError('usuario não encontrado!')
+    await _user.update({ ...body }).then((response) => {
+        return true
+    }).catch((error) => {
+        return false
+    })
+}
 
 module.exports = {
     create,
     findAll,
     findByEmail,
-    findById
+    findById,
+    updateUser
 }
