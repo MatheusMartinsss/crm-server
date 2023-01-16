@@ -1,4 +1,4 @@
-const { emailAlreadyInUse, serverError, missingParamError, notFound } = require('./errors-helper')
+const { emailAlreadyInUse, serverError, missingParamError, notFound, unauthorized } = require('./errors-helper')
 class EmailAlreadyInUse extends Error {
     constructor(arg) {
         super(`Email ${arg} já existe na base de dados!.`)
@@ -23,9 +23,16 @@ class NotFoundError extends Error{
         this.name = notFound
     }
 }
+class Unauthorized extends Error {
+    constructor(){
+        super('Acesso negado!')
+        this.name = unauthorized
+    }
+}
 module.exports = {
     EmailAlreadyInUse,
     ServerError,
     MissingParamError,
-    NotFoundError
+    NotFoundError,
+    Unauthorized
 }
