@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     vendedor_id: DataTypes.UUID
   }, {
     sequelize,
-    modelName: 'Clientes',
+    tableName: 'clientes',
+    modelName: 'Clientes'
   });
   return Clientes;
 };
