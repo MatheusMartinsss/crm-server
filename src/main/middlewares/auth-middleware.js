@@ -1,10 +1,11 @@
 const httpResponse = require("../../utils/helpers/http-helper")
-const { validate } = require("../../utils/helpers/token-generator")
+const { validate, decode } = require("../../utils/helpers/token-generator")
 
 
 module.exports = authMiddleware = (body) => {
-    if (!body.acessToken) return httpResponse.badRequest()
-    const isValid = validate(body.acessToken)
+    if (!body.accesToken) return httpResponse.badRequest()
+    const isValid = validate(body.accesToken)
     if (!isValid) return httpResponse.badRequest()
-    return httpResponse.ok()
+    const decoded = decode(body.accesToken)
+    return httpResponse.ok({ user:decoded })
 }
