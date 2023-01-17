@@ -3,8 +3,8 @@ module.exports = class httpResponse {
         return {
             statusCode: 400,
             body: {
-                error: error.name,
-                message: error.message
+                error: error?.name,
+                message: error?.message
             }
         }
     }
@@ -12,8 +12,8 @@ module.exports = class httpResponse {
         return {
             statusCode: 403,
             body: {
-                error: error.name,
-                message: error.message
+                error: error?.name,
+                message: error?.message
             }
         }
     }
@@ -21,8 +21,8 @@ module.exports = class httpResponse {
         return {
             statusCode: 401,
             body: {
-                error: error.name,
-                message: error.message
+                error: error?.name,
+                message: error?.message
             }
         }
     }
@@ -30,8 +30,8 @@ module.exports = class httpResponse {
         return {
             statusCode: 404,
             body: {
-                error: error.name,
-                message: error.message
+                error: error?.name,
+                message: error?.message
             }
         }
     }
