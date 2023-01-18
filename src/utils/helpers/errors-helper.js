@@ -3,5 +3,6 @@ module.exports = {
     serverError: 'serverError',
     missingParamError: 'missingParamError',
     notFound: 'notFound',
-    unauthorized: 'unauthorized'
+    unauthorized: 'unauthorized',
+    fieldAlreadyInUse: 'fieldAlreadyInUse'
 }

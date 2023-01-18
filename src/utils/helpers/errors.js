@@ -1,4 +1,4 @@
-const { emailAlreadyInUse, serverError, missingParamError, notFound, unauthorized } = require('./errors-helper')
+const { emailAlreadyInUse, serverError, missingParamError, notFound, unauthorized, fieldAlreadyInUse } = require('./errors-helper')
 class EmailAlreadyInUse extends Error {
     constructor(arg) {
         super(`Email ${arg} já existe na base de dados!.`)
@@ -29,10 +29,17 @@ class Unauthorized extends Error {
         this.name = unauthorized
     }
 }
+class FieldAlreadyInUse extends Error {
+    constructor(field, value){
+        super(`O ${field}:${value}f já esta em uso`)
+        this.name = fieldAlreadyInUse
+    }
+}
 module.exports = {
     EmailAlreadyInUse,
     ServerError,
     MissingParamError,
     NotFoundError,
-    Unauthorized
+    Unauthorized,
+    FieldAlreadyInUse
 }
