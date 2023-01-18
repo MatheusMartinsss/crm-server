@@ -1,6 +1,7 @@
-const { Clientes} = require('../../models/')
+const { Clientes } = require('../../models/')
 const { NotFoundError } = require('../../utils/helpers/errors')
-
+const QuerySequelize = require('../helpers/query-builder')
+const queryBuilder = new QuerySequelize()
 const create = async (data) => {
     const _Clientes = await Clientes.create(data)
     return _Clientes
@@ -13,11 +14,12 @@ const findByEmail = async (email) => {
     })
     return _Clientes
 }
-const findAll = async () => {
-    const Clientess = await Clientes.findAll({
-        attributes: { exclude: ['password'] },
-        order: [['createdAt', 'DESC']]
-    })
+const findAll = async (user, query) => {
+    if (user.role != 'admin') {
+        queryBuilder.setWhere({ vendedor_id: user.id })
+    }
+
+    const Clientess = await Clientes.findAll(queryBuilder.getQuery())
     return Clientess
 }
 const findById = async (id) => {
@@ -47,5 +49,5 @@ module.exports = {
     findAll,
     findByEmail,
     findById,
-    updateClientes
+    updateClientes,
 }
