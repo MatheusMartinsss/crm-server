@@ -9,6 +9,6 @@ module.exports = authUserUseCase = async (email, password) => {
     if (!user) throw new NotFoundError('usuario')
     const comparePassword = await compare(password, user.password)
     if (!comparePassword) throw new Unauthorized()
-    const token = generate(user.id, user.name, user.name)
+    const token = generate(user.id, user.name, user.role)
     return token
 }
