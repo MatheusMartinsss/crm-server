@@ -30,18 +30,21 @@ const findById = async (id) => {
     })
     return _Clientes
 }
-const updateClientes = async (id, body) => {
-    const _Clientes = await Clientes.findOne({
+const findByCpf = async (cpf) => {
+    const _cliente = await Clientes.findOne({
+        where: {
+            cpf
+        }
+    })
+    return _cliente
+}
+const updateCliente = async (id, body) => {
+    const _cliente = await Clientes.update({ ...body }, {
         where: {
             id
         }
     })
-    if (!_Clientes) throw new NotFoundError('usuario não encontrado!')
-    await _Clientes.update({ ...body }).then((response) => {
-        return true
-    }).catch((error) => {
-        return false
-    })
+    return _cliente
 }
 
 module.exports = {
@@ -49,5 +52,6 @@ module.exports = {
     findAll,
     findByEmail,
     findById,
-    updateClientes,
+    findByCpf,
+    updateCliente,
 }
