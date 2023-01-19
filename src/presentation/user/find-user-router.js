@@ -1,4 +1,4 @@
-const findUserUseCase = require('../../domain/useCases/find-user-useCase')
+const findUserUseCase = require('../../domain/useCases/user/find-user-useCase')
 const { missingParamError, notFound } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = findUserRouter = async (httpRequest) => {

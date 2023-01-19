@@ -1,5 +1,5 @@
-const { findById } = require('../../infra/repositorys/clientes-repository')
-const { MissingParamError, NotFoundError, Unauthorized } = require('../../utils/helpers/errors')
+const { findById } = require('../../../infra/repositorys/clientes-repository')
+const { MissingParamError, NotFoundError, Unauthorized } = require('../../../utils/helpers/errors')
 module.exports = findUserUseCase = async (user, id) => {
     
     if (!id)

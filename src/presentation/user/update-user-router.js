@@ -1,4 +1,4 @@
-const updateUsersUseCase = require('../../domain/useCases/update-user-useCase')
+const updateUsersUseCase = require('../../domain/useCases/user/update-user-useCase')
 const { notFound } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = updateUserRouter = async (request) => {

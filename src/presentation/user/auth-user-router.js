@@ -1,4 +1,4 @@
-const authUserUseCase = require('../../domain/useCases/auth-user-useCase')
+const authUserUseCase = require('../../domain/useCases/user/auth-user-useCase')
 const { missingParamError, notFound, unauthorized } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = authUserRouter = async (httpRequest) => {

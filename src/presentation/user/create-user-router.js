@@ -1,4 +1,4 @@
-const createUserUseCase = require('../../domain/useCases/create-user-useCase')
+const createUserUseCase = require('../../domain/useCases/user/create-user-useCase')
 const httpResponse = require('../../utils/helpers/http-helper')
 const { emailAlreadyInUse, missingParamError } = require('../../utils/helpers/errors-helper')
 module.exports = createUserRouter = async (request) => {

@@ -1,4 +1,4 @@
-const findClienteUseCase = require('../../domain/useCases/find-cliente-useCase')
+const findClienteUseCase = require('../../domain/useCases/clientes/find-cliente-useCase')
 const { missingParamError, notFound, unauthorized } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = findClienteRouter = async (httpRequest) => {

@@ -1,4 +1,4 @@
-const createClienteUseCase = require('../../domain/useCases/create-cliente-useCase')
+const createClienteUseCase = require('../../domain/useCases/clientes/create-cliente-useCase')
 const httpResponse = require('../../utils/helpers/http-helper')
 const { emailAlreadyInUse, missingParamError } = require('../../utils/helpers/errors-helper')
 module.exports = createClienteRouter = async (request) => {

@@ -1,5 +1,5 @@
-const { updateCliente, findById, findByEmail, findByCpf } = require('../../infra/repositorys/clientes-repository')
-const { MissingParamError, NotFoundError, Unauthorized, EmailAlreadyInUse, FieldAlreadyInUse } = require('../../utils/helpers/errors')
+const { updateCliente, findById, findByEmail, findByCpf } = require('../../../infra/repositorys/clientes-repository')
+const { MissingParamError, NotFoundError, Unauthorized, EmailAlreadyInUse, FieldAlreadyInUse } = require('../../../utils/helpers/errors')
 module.exports = updateClienteUseCase = async (user, id, body) => {
     if (!id)
         throw new MissingParamError('id')

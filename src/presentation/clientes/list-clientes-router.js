@@ -1,4 +1,4 @@
-const listClientesUseCase = require('../../domain/useCases/list-clientes-useCase')
+const listClientesUseCase = require('../../domain/useCases/clientes/list-clientes-useCase')
 const { notFound } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = listClientesRouter = async (request) => {

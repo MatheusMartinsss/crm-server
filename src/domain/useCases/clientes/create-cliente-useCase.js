@@ -1,5 +1,5 @@
-const { create, findByEmail } = require('../../infra/repositorys/clientes-repository')
-const { EmailAlreadyInUse, MissingParamError } = require('../../utils/helpers/errors')
+const { create, findByEmail } = require('../../../infra/repositorys/clientes-repository')
+const { EmailAlreadyInUse, MissingParamError } = require('../../../utils/helpers/errors')
 module.exports = createUserUseCase = async (user, body) => {
     const verifyEmailAlreadyInUse = await findByEmail(body.email)
     const requiredFields = ['email', 'name', 'lastname', 'cpf', 'phonenumber']
