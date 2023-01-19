@@ -5,12 +5,12 @@ const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = createNegociacaoRouter = async (httpRequest) => {
     try {
         const negociacao = await createNegociacaoUseCase(httpRequest.user, httpRequest.body)
-        return httpResponse.ok(negociacao)
+        return httpResponse.created(negociacao)
     } catch (error) {
         switch (error.name) {
-            case missingParamError: httpResponse.badRequest(error)
-            case unauthorized: httpResponse.unauthorized(error)
-            default: httpResponse.serverError(error)
+            case missingParamError: return httpResponse.badRequest(error)
+            case unauthorized: return httpResponse.unauthorized(error)
+            default: return httpResponse.serverError(error)
         }
     }
 }
