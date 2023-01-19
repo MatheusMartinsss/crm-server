@@ -18,7 +18,9 @@ const findAll = async (user, query) => {
     if (user.role != 'admin') {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
-
+    if (query.cliente_id) {
+        queryBuilder.setWhere({ cliente_id: query.cliente_id })
+    }
     const Negociacoess = await Negociacoes.findAll(queryBuilder.getQuery())
     return Negociacoess
 }
