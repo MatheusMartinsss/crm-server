@@ -45,5 +45,5 @@ module.exports = {
     findAll,
     findByEmail,
     findById,
-    updateCliente,
+    updateNegociacao,
 }
