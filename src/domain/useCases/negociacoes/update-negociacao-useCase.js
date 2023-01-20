@@ -11,7 +11,7 @@ module.exports = updateNegociacaoUseCase = async (user, id, body) => {
     await findNegociacaoUseCase(user, id)
 
     if (body.cliente_id) {
-        await findClienteUseCase(body.cliente_id)
+        await findClienteUseCase(user, body.cliente_id)
     }
 
     if (body.vendedor_id && user.role != 'admin')
