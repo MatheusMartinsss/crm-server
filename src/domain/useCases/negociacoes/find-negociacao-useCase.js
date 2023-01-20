@@ -8,7 +8,7 @@ module.exports = findNegociacaoUseCase = async (user, id) => {
     if (!negociacao)
         throw new NotFoundError('negociacao')
 
-    if (user.id != negociacao.vendedor_id)
+    if (user.role != 'admin' && user.id != negociacao.vendedor_id)
         throw new Unauthorized()
 
     return negociacao
