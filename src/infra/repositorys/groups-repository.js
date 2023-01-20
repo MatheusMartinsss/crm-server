@@ -32,9 +32,15 @@ const updateGroup = async (id, body) => {
     return group
 }
 
+const findAll = async (query) => {
+    const groups = await Groups.findAll({})
+    return groups
+}
+
 module.exports = {
     create,
     findByName,
     findGroupById,
-    updateGroup
+    updateGroup,
+    findAll
 }
