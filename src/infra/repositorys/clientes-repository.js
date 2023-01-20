@@ -1,7 +1,6 @@
 const { Clientes } = require('../../models/')
 const { NotFoundError } = require('../../utils/helpers/errors')
 const QuerySequelize = require('../helpers/query-builder')
-const queryBuilder = new QuerySequelize()
 const create = async (data) => {
     const _Clientes = await Clientes.create(data)
     return _Clientes
@@ -15,6 +14,7 @@ const findByEmail = async (email) => {
     return _Clientes
 }
 const findAll = async (user, query) => {
+    const queryBuilder = new QuerySequelize()
     if (user.role != 'admin') {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
