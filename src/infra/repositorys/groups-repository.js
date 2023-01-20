@@ -1,5 +1,5 @@
-const { Groups } = require('../../models')
-
+const { Groups, Negociacoes } = require('../../models')
+const QuerySequelize = require('../helpers/query-builder')
 const create = async (body) => {
     const group = await Groups.create({ ...body })
     return group;
@@ -31,7 +31,15 @@ const updateGroup = async (id, body) => {
     })
     return group
 }
+const listNegociacoesByGroups = async () => {
+    const queryBuilder = new QuerySequelize()
+    queryBuilder
+        .setIncludes([{ model: Negociacoes, as: 'Negociacoes' }])
 
+    const groups = await Groups.findAll(queryBuilder.getQuery())
+    return groups
+
+}
 const findAll = async (query) => {
     const groups = await Groups.findAll({})
     return groups
@@ -42,5 +50,6 @@ module.exports = {
     findByName,
     findGroupById,
     updateGroup,
-    findAll
+    findAll,
+    listNegociacoesByGroups
 }
