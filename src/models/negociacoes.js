@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Negociacoes.belongsTo(models.User, { foreignKey: 'vendedor_id', as: "Vendedor" })
       Negociacoes.belongsTo(models.Clientes, { foreignKey: 'cliente_id', as: "Cliente" })
+      Negociacoes.belongsTo(models.Groups, { foreignKey: 'group_id', as: 'Group' })
     }
   }
   Negociacoes.init({
@@ -22,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     value: DataTypes.DECIMAL(10, 2),
     vendedor_id: DataTypes.UUID,
     cliente_id: DataTypes.UUID,
+    group_id: DataTypes.INTEGER,
     closeExpect: DataTypes.DATE
   }, {
     sequelize,
