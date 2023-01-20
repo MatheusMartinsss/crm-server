@@ -57,6 +57,7 @@ const removeNegociacao = async (id) => {
     return negociacao
 }
 
+
 module.exports = {
     create,
     findAll,
