@@ -48,6 +48,14 @@ const updateNegociacao = async (id, body) => {
     })
     return _Negociacoes
 }
+const removeNegociacao = async (id) => {
+    const negociacao = await Negociacoes.destroy({
+        where: {
+            id
+        }
+    })
+    return negociacao
+}
 
 module.exports = {
     create,
@@ -55,4 +63,5 @@ module.exports = {
     findByEmail,
     findById,
     updateNegociacao,
+    removeNegociacao
 }
