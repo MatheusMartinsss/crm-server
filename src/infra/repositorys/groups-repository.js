@@ -14,7 +14,27 @@ const findByName = async (name) => {
     return group
 }
 
+const findGroupById = async (id) => {
+    const group = await Groups.findOne({
+        where: {
+            id
+        }
+    })
+    return group
+}
+
+const updateGroup = async (id, body) => {
+    const group = await Groups.update({ ...body }, {
+        where: {
+            id
+        }
+    })
+    return group
+}
+
 module.exports = {
     create,
-    findByName
+    findByName,
+    findGroupById,
+    updateGroup
 }
