@@ -3,7 +3,7 @@ const { unauthorized, missingParamError, notFound } = require('../../utils/helpe
 const httpResponse = require('../../utils/helpers/http-helper')
 module.exports = updateNegociacaoRouter = async (httpRequest) => {
     try {
-        const negociacao = await updateNegociacaoUseCase(httpRequest.user, httpRequest.params.id)
+        const negociacao = await updateNegociacaoUseCase(httpRequest.user, httpRequest.params.id, httpRequest.body)
         return httpResponse.ok(negociacao)
     } catch (error) {
         switch (error.name) {
