@@ -30,7 +30,7 @@ const findAll = async () => {
 }
 
 const updateTag = async (id, body) => {
-    const tag = await tag.update({ ...body }, {
+    const tag = await Tags.update({ ...body }, {
         where: {
             id
         }
