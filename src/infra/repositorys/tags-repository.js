@@ -29,9 +29,19 @@ const findAll = async () => {
     return tags
 }
 
+const updateTag = async (id, body) => {
+    const tag = await tag.update({ ...body }, {
+        where: {
+            id
+        }
+    })
+    return tag
+}
+
 module.exports = {
     create,
     findByName,
     findTagById,
-    findAll
+    findAll,
+    updateTag
 }
