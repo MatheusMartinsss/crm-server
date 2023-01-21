@@ -3,10 +3,6 @@ module.exports = class CreateQuerySequelize {
     constructor() {
         this.query = {
             where: {},
-            attributes: {
-                exclude: [],
-                include: []
-            },
             include: []
         }
     }
@@ -45,9 +41,9 @@ module.exports = class CreateQuerySequelize {
     setIncludesAttributesInclude(model, attributes) {
         const _model = this.query.include.find((m) => m.model == model)
         Object.assign(_model, {
-            attributes: {
-                include: attributes
-            }
+            attributes:
+                attributes
+
         })
         return this
     }
@@ -63,6 +59,11 @@ module.exports = class CreateQuerySequelize {
     setIncludesAssociations(model, modelObject) {
         const _model = this.query.include.find((m) => m.model == model)
         Object.assign(_model, { include: [modelObject] })
+        return this
+    }
+    setIncludesAssociationsAttributes(model1, model2, attributes) {
+        const _model = this.query.include.find((m) => m.model == model1).include.find((m) => m.model == model2)
+        Object.assign(_model, { attributes: attributes })
         return this
     }
 }
