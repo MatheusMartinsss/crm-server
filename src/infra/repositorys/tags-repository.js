@@ -24,8 +24,14 @@ const findTagById = async (id) => {
     return tag
 }
 
+const findAll = async () => {
+    const tags = await Tags.findAll({})
+    return tags
+}
+
 module.exports = {
     create,
     findByName,
-    findTagById
+    findTagById,
+    findAll
 }
