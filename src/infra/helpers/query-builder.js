@@ -58,7 +58,11 @@ module.exports = class CreateQuerySequelize {
     }
     setIncludesAssociations(model, modelObject) {
         const _model = this.query.include.find((m) => m.model == model)
-        Object.assign(_model, { include: [modelObject] })
+        if (_model?.include?.length) {//verify if the model already have another association, case have, this gona iterate the associations and add the new association. Is horrible but work ;)
+            Object.assign(_model, { include: [..._model.include, modelObject] })
+        } else {
+            Object.assign(_model, { include: [modelObject] })
+        }
         return this
     }
     setIncludesAssociationsAttributes(model1, model2, attributes) {
