@@ -45,7 +45,6 @@ const listNegociacoesByGroups = async (id) => {
             id: id
         })
     }
-    console.log(queryBuilder.getQuery())
     const groups = await Groups.findAll(queryBuilder.getQuery())
     return groups
 }
