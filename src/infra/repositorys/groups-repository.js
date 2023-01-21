@@ -1,4 +1,4 @@
-const { Groups, Negociacoes } = require('../../models')
+const { Groups, Negociacoes, Clientes, User } = require('../../models')
 const QuerySequelize = require('../helpers/query-builder')
 const create = async (body) => {
     const group = await Groups.create({ ...body })
@@ -31,15 +31,25 @@ const updateGroup = async (id, body) => {
     })
     return group
 }
-const listNegociacoesByGroups = async () => {
+const listNegociacoesByGroups = async (id) => {
     const queryBuilder = new QuerySequelize()
     queryBuilder
         .setIncludes([{ model: Negociacoes, as: 'Negociacoes' }])
+        .setIncludesAssociations(Negociacoes, { model: Clientes, as: 'Cliente' })
+        .setIncludesAssociationsAttributes(Negociacoes, Clientes, ['name', 'cpf'])
+        .setIncludesAssociations(Negociacoes, { model: User, as: 'Vendedor' })
+        .setIncludesAssociationsAttributes(Negociacoes, User, ['name'])
 
+    if (id) {
+        queryBuilder.setWhere({
+            id: id
+        })
+    }
+    console.log(queryBuilder.getQuery())
     const groups = await Groups.findAll(queryBuilder.getQuery())
     return groups
-
 }
+
 const findAll = async (query) => {
     const groups = await Groups.findAll({})
     return groups
