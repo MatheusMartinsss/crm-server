@@ -57,6 +57,11 @@ const removeNegociacao = async (id) => {
     return negociacao
 }
 
+const addTag = async (negociacao, tags) => {
+    const _negociacao = await negociacao.addTags(tags)
+    return _negociacao
+
+}
 
 module.exports = {
     create,
@@ -64,5 +69,6 @@ module.exports = {
     findByEmail,
     findById,
     updateNegociacao,
-    removeNegociacao
+    removeNegociacao,
+    addTag
 }
