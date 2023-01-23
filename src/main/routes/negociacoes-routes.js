@@ -4,7 +4,8 @@ const {
     findNegociacaoRouter,
     removeNegociacaoRouter,
     updateNegociacaoRouter,
-    addTagsToNegociacaoRouter
+    addTagsToNegociacaoRouter,
+    removeTagsNegociacoesRouter
 } = require('../../presentation/negociacao')
 const { adapt } = require('../middlewares/express-router-adapter')
 const { validate } = require('../middlewares/express-middleware-adapter')
@@ -15,4 +16,5 @@ module.exports = router => {
     router.delete('/negociacao/:id', validate(authMiddleware), adapt(removeNegociacaoRouter))
     router.put('/negociacao/:id', validate(authMiddleware), adapt(updateNegociacaoRouter))
     router.post('/negociacao/:id/tags', validate(authMiddleware), adapt(addTagsToNegociacaoRouter))
+    router.delete('/negociacao/:id/tags', validate(authMiddleware), adapt(removeTagsNegociacoesRouter))
 }
