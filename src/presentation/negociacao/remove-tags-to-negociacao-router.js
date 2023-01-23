@@ -2,7 +2,7 @@ const removeTagsToNegociacaoUseCase = require('../../domain/useCases/negociacoes
 const { missingParamError, notFound } = require('../../utils/helpers/errors-helper')
 const httpResponse = require('../../utils/helpers/http-helper')
 
-module.exports = addTagToNegociacaoRouter = async (httpRequest) => {
+module.exports = removeTagToNegociacaoRouter = async (httpRequest) => {
     try {
         const negociacao = await removeTagsToNegociacaoUseCase(httpRequest.user, httpRequest.params.id, httpRequest.body)
         return httpResponse.ok(negociacao)
