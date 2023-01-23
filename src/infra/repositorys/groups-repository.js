@@ -1,4 +1,4 @@
-const { Groups, Negociacoes, Clientes, User } = require('../../models')
+const { Groups, Negociacoes, Clientes, User, Tags } = require('../../models')
 const QuerySequelize = require('../helpers/query-builder')
 const create = async (body) => {
     const group = await Groups.create({ ...body })
@@ -39,7 +39,12 @@ const listNegociacoesByGroups = async (id) => {
         .setIncludesAssociationsAttributes(Negociacoes, Clientes, ['name', 'cpf'])
         .setIncludesAssociations(Negociacoes, { model: User, as: 'Vendedor' })
         .setIncludesAssociationsAttributes(Negociacoes, User, ['name'])
-
+        .setIncludesAssociations(Negociacoes, {
+            model: Tags, as: 'Tags', through: {
+                attributes: []
+            }
+        })
+        .setIncludesAssociationsAttributes(Negociacoes, Tags, ['id','name', 'color'])
     if (id) {
         queryBuilder.setWhere({
             id: id
