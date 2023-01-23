@@ -1,4 +1,4 @@
-const { Negociacoes, Clientes, User } = require('../../models/')
+const { Negociacoes, Clientes, User, Tags } = require('../../models/')
 const { NotFoundError } = require('../../utils/helpers/errors')
 const QuerySequelize = require('../helpers/query-builder')
 
@@ -25,6 +25,15 @@ const findAll = async (user, query) => {
     if (query.vendedor_id) {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
+    queryBuilder
+        .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' }, {
+            model: Tags, as: 'Tags', through: {
+                attributes: []
+            }
+        }])
+        .setIncludesAttributesInclude(Clientes, ['id','name', 'lastname', 'cpf'])
+        .setIncludesAttributesInclude(User, ['id','name'])
+        .setIncludesAttributesInclude(Tags, ['name', 'color', 'id'])
     const Negociacoess = await Negociacoes.findAll(queryBuilder.getQuery())
     return Negociacoess
 }
@@ -32,7 +41,11 @@ const findById = async (id) => {
     const queryBuilder = new QuerySequelize()
     queryBuilder
         .setWhere({ id: id })
-        .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' }])
+        .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' },{
+            model: Tags, as: 'Tags', through: {
+                attributes: []
+            }
+        }])
         .setIncludesAttributesExclude(Clientes, ['vendedor_id'])
         .setIncludesAttributesExclude(User, ['password', 'token', 'role'])
 
