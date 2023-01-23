@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Negociacoes.belongsTo(models.User, { foreignKey: 'vendedor_id', as: "Vendedor" })
       Negociacoes.belongsTo(models.Clientes, { foreignKey: 'cliente_id', as: "Cliente" })
       Negociacoes.belongsTo(models.Groups, { foreignKey: 'group_id', as: 'Group' })
+      Negociacoes.belongsToMany(models.Tags, { foreignKey: 'negociacao_id', otherKey: 'tag_id', through: 'negociacoes_tags' })
     }
   }
   Negociacoes.init({
