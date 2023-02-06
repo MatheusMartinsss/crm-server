@@ -1,4 +1,5 @@
-const { Negociacoes, Clientes, User, Tags } = require('../../models/')
+const { Negociacoes, Clientes, User, Tags, Groups } = require('../../models/')
+const groups = require('../../models/groups')
 const { NotFoundError } = require('../../utils/helpers/errors')
 const QuerySequelize = require('../helpers/query-builder')
 
@@ -30,10 +31,11 @@ const findAll = async (user, query) => {
             model: Tags, as: 'Tags', through: {
                 attributes: []
             }
-        }])
-        .setIncludesAttributesInclude(Clientes, ['id','name', 'lastname', 'cpf'])
-        .setIncludesAttributesInclude(User, ['id','name'])
+        }, { model: Groups, as: 'Group' }])
+        .setIncludesAttributesInclude(Clientes, ['id', 'name', 'lastname', 'cpf'])
+        .setIncludesAttributesInclude(User, ['id', 'name'])
         .setIncludesAttributesInclude(Tags, ['name', 'color', 'id'])
+        .setIncludesAttributesInclude(Groups, ['name'])
     const Negociacoess = await Negociacoes.findAll(queryBuilder.getQuery())
     return Negociacoess
 }
@@ -41,13 +43,30 @@ const findById = async (id) => {
     const queryBuilder = new QuerySequelize()
     queryBuilder
         .setWhere({ id: id })
-        .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' },{
-            model: Tags, as: 'Tags', through: {
-                attributes: []
+        .setIncludes([
+            {
+                model: Clientes,
+                as: 'Cliente'
+            },
+            {
+                model: User,
+                as: 'Vendedor'
+            },
+            {
+                model: Tags, as: 'Tags',
+                through: {
+                    attributes: []
+                }
+            },
+            {
+                model: Groups,
+                as: 'Group',
+
             }
-        }])
+        ])
         .setIncludesAttributesExclude(Clientes, ['vendedor_id'])
         .setIncludesAttributesExclude(User, ['password', 'token', 'role'])
+        .setIncludesAttributesInclude(Groups, ['name'])
 
     const _Negociacoes = await Negociacoes.findOne(queryBuilder.getQuery())
     return _Negociacoes
