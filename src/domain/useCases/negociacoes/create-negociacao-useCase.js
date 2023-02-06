@@ -1,4 +1,4 @@
-const { create } = require('../../../infra/repositorys/negociacao-repository')
+const { create, findById, addTag } = require('../../../infra/repositorys/negociacao-repository')
 const findClienteUseCase = require('../clientes/find-cliente-useCase')
 const { MissingParamError } = require('../../../utils/helpers/errors')
 module.exports = createNegociacaoUseCase = async (user, body) => {
@@ -12,6 +12,10 @@ module.exports = createNegociacaoUseCase = async (user, body) => {
             throw new MissingParamError(requiredFields[field])
         }
     }
-    const negociacao = await create(body)
+    const response = await create(body)
+    if (body?.tags) {
+        await addTag(response, body.tags)
+    }
+    const negociacao = await findById(response.id)
     return negociacao
 }
