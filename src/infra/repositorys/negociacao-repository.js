@@ -66,7 +66,7 @@ const findById = async (id) => {
         ])
         .setIncludesAttributesExclude(Clientes, ['vendedor_id'])
         .setIncludesAttributesExclude(User, ['password', 'token', 'role'])
-        .setIncludesAttributesInclude(Groups, ['name'])
+        .setIncludesAttributesInclude(Groups, ['name', 'id'])
 
     const _Negociacoes = await Negociacoes.findOne(queryBuilder.getQuery())
     return _Negociacoes
