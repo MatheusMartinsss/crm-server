@@ -3,7 +3,9 @@ module.exports = class CreateQuerySequelize {
     constructor() {
         this.query = {
             where: {},
-            include: []
+            include: [],
+            attributes: [],
+            group: []
         }
     }
     getQuery() {
@@ -27,6 +29,14 @@ module.exports = class CreateQuerySequelize {
     }
     setAttributesInclude(columTable) {
         Object.assign(this.query.attributes.include, columTable)
+        return this
+    }
+    addAttributes(attributes) {
+        Object.assign(this.query.attributes, [...this.query?.attributes, ...attributes])
+        return this
+    }
+    addGroup(group) {
+        Object.assign(this.query.group, group)
         return this
     }
     setIncludes(modelObject) {
