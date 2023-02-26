@@ -4,8 +4,7 @@ module.exports = class CreateQuerySequelize {
         this.query = {
             where: {},
             include: [],
-            attributes: [],
-            group: []
+
         }
     }
     getQuery() {
@@ -32,11 +31,11 @@ module.exports = class CreateQuerySequelize {
         return this
     }
     addAttributes(attributes) {
-        Object.assign(this.query.attributes, [...this.query?.attributes, ...attributes])
+        Object.assign(this.query, { attributes: attributes })
         return this
     }
     addGroup(group) {
-        Object.assign(this.query.group, group)
+        Object.assign(this.query, { group: group })
         return this
     }
     setIncludes(modelObject) {
