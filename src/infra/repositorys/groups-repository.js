@@ -1,4 +1,5 @@
-const { Groups, Negociacoes, Clientes, User, Tags } = require('../../models')
+const { Sequelize } = require('sequelize');
+const { Groups, Negociacoes, Clientes, User, Tags, sequelize } = require('../../models')
 const QuerySequelize = require('../helpers/query-builder')
 const create = async (body) => {
     const group = await Groups.create({ ...body })
@@ -34,7 +35,11 @@ const updateGroup = async (id, body) => {
 const listNegociacoesByGroups = async (id) => {
     const queryBuilder = new QuerySequelize()
     queryBuilder
+        .addAttributes(['name', 'id', 'description', 'createdAt', 'updatedAt',
+            [Sequelize.fn('SUM', Sequelize.literal('(SELECT SUM(value) FROM "negociacoes" WHERE "negociacoes"."group_id" = "Groups"."id")')), 'valueTotal']])
+        .addGroup(['Groups.id', 'Negociacoes.id', 'Negociacoes->Cliente.id', 'Negociacoes->Vendedor.id', 'Negociacoes->Tags.id'])
         .setIncludes([{ model: Negociacoes, as: 'Negociacoes' }])
+        //   .setIncludesAttributesInclude(Negociacoes, [])
         .setIncludesAssociations(Negociacoes, { model: Clientes, as: 'Cliente' })
         .setIncludesAssociationsAttributes(Negociacoes, Clientes, ['name', 'cpf'])
         .setIncludesAssociations(Negociacoes, { model: User, as: 'Vendedor' })
@@ -44,7 +49,7 @@ const listNegociacoesByGroups = async (id) => {
                 attributes: []
             }
         })
-        .setIncludesAssociationsAttributes(Negociacoes, Tags, ['id','name', 'color'])
+        .setIncludesAssociationsAttributes(Negociacoes, Tags, ['id', 'name', 'color'])
     if (id) {
         queryBuilder.setWhere({
             id: id
