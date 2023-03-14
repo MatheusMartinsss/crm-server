@@ -17,8 +17,9 @@ module.exports = updateGroupUseCase = async (id, body) => {
             throw new FieldAlreadyInUse('name', body.name)
     }
 
-    const group = await updateGroup(id, body)
+    await updateGroup(id, body)
 
-    return group
+    const updated = await findGroupByIdUseCase(id)
 
+    return updated
 }
