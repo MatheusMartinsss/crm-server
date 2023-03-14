@@ -20,6 +20,9 @@ module.exports = updateClienteUseCase = async (user, id, body) => {
         const verifyCpfAlreadyInUse = await findByCpf(body.cpf)
         if (verifyCpfAlreadyInUse) throw new FieldAlreadyInUse('cpf', body.cpf)
     }
-    const updated = await updateCliente(id, body)
+    
+    await updateCliente(id, body)
+    const updated = await findById(id)
+
     return updated
 }
