@@ -1,9 +1,11 @@
-const { Clientes } = require('../../models/')
-const { NotFoundError } = require('../../utils/helpers/errors')
+const { Clientes, Location } = require('../../models/')
 const QuerySequelize = require('../helpers/query-builder')
 const create = async (data) => {
-    const _Clientes = await Clientes.create(data)
-    return _Clientes
+    const _cliente = await Clientes.create({
+        ...data,
+        Location: data?.location
+    }, data.location ? { include: Location, as: 'Location' } : {})
+    return _cliente
 }
 const findByEmail = async (email) => {
     const _Clientes = await Clientes.findOne({
@@ -18,16 +20,23 @@ const findAll = async (user, query) => {
     if (user.role != 'admin') {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
+    queryBuilder
+        .setIncludes([{ model: Location, as: 'Location' }])
 
     const Clientess = await Clientes.findAll(queryBuilder.getQuery())
+    
     return Clientess
 }
 const findById = async (id) => {
-    const _Clientes = await Clientes.findOne({
-        where: {
-            id
-        }
-    })
+
+    const queryBuilder = new QuerySequelize()
+
+    queryBuilder
+        .setIncludes([{ model: Location, as: 'Location' }])
+        .setWhere({ id: id })
+
+    const _Clientes = await Clientes.findOne(queryBuilder.getQuery())
+
     return _Clientes
 }
 const findByCpf = async (cpf) => {
@@ -39,12 +48,22 @@ const findByCpf = async (cpf) => {
     return _cliente
 }
 const updateCliente = async (id, body) => {
-    const _cliente = await Clientes.update({ ...body }, {
-        where: {
-            id
-        }
+    const cliente = await Clientes.findOne({
+        where: { id }
     })
-    return _cliente
+
+    await cliente.update(body)
+
+    if (body.location) {
+        const location = await cliente.getLocation()
+        if (!location) {
+            await cliente.createLocation(body.location)
+        } else {
+            await location.update(body.location)
+        }
+    }
+
+    return cliente
 }
 
 module.exports = {
