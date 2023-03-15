@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Location.belongsTo(models.Clientes, { foreignKey: 'cliente_id', as: "Cliente" })
+            Location.belongsTo(models.Clientes, { foreignKey: 'cliente_id', as: 'Location' })
         }
     }
     Location.init({
