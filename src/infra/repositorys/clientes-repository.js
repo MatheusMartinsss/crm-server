@@ -3,8 +3,8 @@ const QuerySequelize = require('../helpers/query-builder')
 const create = async (data) => {
     const _cliente = await Clientes.create({
         ...data,
-        Location: data?.location
-    }, data.location ? { include: Location, as: 'Location' } : {})
+        location: data?.location
+    }, data.location ? { include: Location, as: 'location' } : {})
     return _cliente
 }
 const findByEmail = async (email) => {
@@ -21,7 +21,7 @@ const findAll = async (user, query) => {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
     queryBuilder
-        .setIncludes([{ model: Location, as: 'Location' }])
+        .setIncludes([{ model: Location, as: 'location' }])
 
     const Clientess = await Clientes.findAll(queryBuilder.getQuery())
     
@@ -32,7 +32,7 @@ const findById = async (id) => {
     const queryBuilder = new QuerySequelize()
 
     queryBuilder
-        .setIncludes([{ model: Location, as: 'Location' }])
+        .setIncludes([{ model: Location, as: 'location' }])
         .setWhere({ id: id })
 
     const _Clientes = await Clientes.findOne(queryBuilder.getQuery())
