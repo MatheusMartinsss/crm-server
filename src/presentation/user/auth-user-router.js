@@ -11,7 +11,7 @@ module.exports = authUserRouter = async (httpRequest) => {
             case notFound: return httpResponse.notFound(error)
             case unauthorized: return httpResponse.unauthorized(error)
             case missingParamError: return httpResponse.badRequest(error)
-            default: return httpResponse.serverError()
+            default: return httpResponse.serverError(error)
         }
     }
 }
