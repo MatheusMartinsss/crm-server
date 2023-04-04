@@ -15,6 +15,8 @@ RUN apk add --no-cache --virtual  .gyp \
 
 COPY . .
 
+RUN npm sequelize db:migrate
+
 EXPOSE 8080
 
 CMD ["npm", "start"]
