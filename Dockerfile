@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install
-
+RUN npm i -g sequelize-cli
 RUN apk add --no-cache --virtual  .gyp \
         python3 \
         make \
@@ -15,8 +15,5 @@ RUN apk add --no-cache --virtual  .gyp \
 
 COPY . .
 
-RUN npx sequelize db:migrate
-
 EXPOSE 8080
 
-CMD ["npm", "start"]

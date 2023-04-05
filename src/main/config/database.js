@@ -7,6 +7,9 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
+    retry:{
+      max: 10
+    },
     dialect: 'postgres',
     logging: true
   },
@@ -17,6 +20,9 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
+    retry:{
+      max: 10
+    },
     logging: true
   },
   production: {
@@ -25,6 +31,9 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
+    retry:{
+      max: 10
+    },
     dialect: process.env.DB_DIALECT,
   }
 };
