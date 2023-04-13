@@ -15,5 +15,6 @@ RUN apk add --no-cache --virtual  .gyp \
 
 COPY . .
 
-EXPOSE 8080
+ENV PORT $PORT
+EXPOSE $PORT
 
