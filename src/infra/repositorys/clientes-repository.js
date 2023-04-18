@@ -3,8 +3,11 @@ const QuerySequelize = require('../helpers/query-builder')
 const create = async (data) => {
     const _cliente = await Clientes.create({
         ...data,
-        location: data?.location
-    }, data.location ? { include: Location, as: 'location' } : {})
+    })
+    if (data.location) {
+        console.log(data.location)
+        await _cliente.createLocation(data.location)
+    }
     return _cliente
 }
 const findByEmail = async (email) => {
@@ -24,7 +27,7 @@ const findAll = async (user, query) => {
         .setIncludes([{ model: Location, as: 'location' }])
 
     const Clientess = await Clientes.findAll(queryBuilder.getQuery())
-    
+
     return Clientess
 }
 const findById = async (id) => {

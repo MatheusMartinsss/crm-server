@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Location.init({
         estado: DataTypes.STRING,
         cidade: DataTypes.STRING,
+        uf: DataTypes.STRING,
         cliente_id: DataTypes.UUID,
 
     }, {
