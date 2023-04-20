@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     phonenumber: DataTypes.STRING,
     cpf: DataTypes.STRING,
-    vendedor_id: DataTypes.UUID
+    vendedor_id: DataTypes.UUID,
+    empresa_tamanho: DataTypes.ENUM(['pequena', 'media', 'grande', '']),
+    pessoa_tipo: DataTypes.ENUM(['fisica', 'juridica'])
   }, {
     sequelize,
     tableName: 'clientes',
