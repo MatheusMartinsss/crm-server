@@ -28,13 +28,11 @@ const findAll = async (user, query) => {
     }
     queryBuilder
         .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' }, {
-            model: Tags, as: 'Tags', through: {
-                attributes: []
-            }
+            model: Tags, as: 'Tag',
         }, { model: Groups, as: 'Group' }])
         .setIncludesAttributesInclude(Clientes, ['id', 'name', 'lastname', 'cpf'])
         .setIncludesAttributesInclude(User, ['id', 'name'])
-        .setIncludesAttributesInclude(Tags, ['name', 'color', 'id'])
+        .setIncludesAttributesInclude(Tags, ['name', 'color'])
         .setIncludesAttributesInclude(Groups, ['name'])
     const Negociacoess = await Negociacoes.findAll(queryBuilder.getQuery())
     return Negociacoess
@@ -53,10 +51,9 @@ const findById = async (id) => {
                 as: 'Vendedor'
             },
             {
-                model: Tags, as: 'Tags',
-                through: {
-                    attributes: []
-                }
+                model: Tags,
+                as: 'Tag',
+
             },
             {
                 model: Groups,
@@ -90,16 +87,16 @@ const removeNegociacao = async (id) => {
 }
 
 const addTag = async (negociacao, tags) => {
-    const _negociacao = await negociacao.addTags(tags)
+    const _negociacao = await negociacao.addTag(tags)
     return _negociacao
 
 }
 const removeTag = async (negociacao, tags) => {
-    const _negociacao = await negociacao.removeTags(tags)
+    const _negociacao = await negociacao.removeTag(tags)
     return _negociacao
 }
 const updateTags = async (negociacao, tags) => {
-    const _negociacao = await negociacao.setTags( tags )
+    const _negociacao = await negociacao.setTag(tags)
     return _negociacao
 }
 module.exports = {

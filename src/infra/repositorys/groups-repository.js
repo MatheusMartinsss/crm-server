@@ -37,7 +37,7 @@ const listNegociacoesByGroups = async (id) => {
     queryBuilder
         .addAttributes(['name', 'id', 'description', 'createdAt', 'updatedAt',
             [Sequelize.fn('SUM', Sequelize.literal('(SELECT SUM(value) FROM "negociacoes" WHERE "negociacoes"."group_id" = "Groups"."id")')), 'valueTotal']])
-        .addGroup(['Groups.id', 'Negociacoes.id', 'Negociacoes->Cliente.id', 'Negociacoes->Vendedor.id', 'Negociacoes->Tags.id'])
+        .addGroup(['Groups.id', 'Negociacoes.id', 'Negociacoes->Cliente.id', 'Negociacoes->Vendedor.id', 'Negociacoes->Tag.id'])
         .setIncludes([{ model: Negociacoes, as: 'Negociacoes' }])
         //   .setIncludesAttributesInclude(Negociacoes, [])
         .setIncludesAssociations(Negociacoes, { model: Clientes, as: 'Cliente' })
@@ -45,9 +45,7 @@ const listNegociacoesByGroups = async (id) => {
         .setIncludesAssociations(Negociacoes, { model: User, as: 'Vendedor' })
         .setIncludesAssociationsAttributes(Negociacoes, User, ['name'])
         .setIncludesAssociations(Negociacoes, {
-            model: Tags, as: 'Tags', through: {
-                attributes: []
-            }
+            model: Tags, as: 'Tag'
         })
         .setIncludesAssociationsAttributes(Negociacoes, Tags, ['id', 'name', 'color'])
     if (id) {
