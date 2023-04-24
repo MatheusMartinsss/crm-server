@@ -86,8 +86,8 @@ const removeNegociacao = async (id) => {
     return negociacao
 }
 
-const addTag = async (negociacao, tags) => {
-    const _negociacao = await negociacao.addTag(tags)
+const addTag = async (negociacao, tag) => {
+    const _negociacao = await negociacao.setTag(tag)
     return _negociacao
 
 }
@@ -95,8 +95,8 @@ const removeTag = async (negociacao, tags) => {
     const _negociacao = await negociacao.removeTag(tags)
     return _negociacao
 }
-const updateTags = async (negociacao, tags) => {
-    const _negociacao = await negociacao.setTag(tags)
+const updateTags = async (negociacao, tag) => {
+    const _negociacao = await negociacao.setTag(tag)
     return _negociacao
 }
 module.exports = {

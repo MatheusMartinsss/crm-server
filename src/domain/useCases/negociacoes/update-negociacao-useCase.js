@@ -23,8 +23,8 @@ module.exports = updateNegociacaoUseCase = async (user, id, body) => {
     if (body?.group_id) {
         await findGroupByIdUseCase(body.group_id)
     }
-    if (body?.tags) {
-        await updateTags(_negociacao, body.tags)
+    if (body?.Tag) {
+        await updateTags(_negociacao, body?.Tag?.id)
     }
     await updateNegociacao(id, body)
 

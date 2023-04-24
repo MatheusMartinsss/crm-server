@@ -13,8 +13,8 @@ module.exports = createNegociacaoUseCase = async (user, body) => {
         }
     }
     const response = await create(body)
-    if (body?.tags) {
-        await addTag(response, body.tags)
+    if (body?.Tag) {
+        await addTag(response, body?.Tag?.id)
     }
     const negociacao = await findById(response.id)
     return negociacao
