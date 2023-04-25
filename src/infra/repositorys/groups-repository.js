@@ -41,7 +41,7 @@ const listNegociacoesByGroups = async (id) => {
         .setIncludes([{ model: Negociacoes, as: 'Negociacoes' }])
         //   .setIncludesAttributesInclude(Negociacoes, [])
         .setIncludesAssociations(Negociacoes, { model: Clientes, as: 'Cliente' })
-        .setIncludesAssociationsAttributes(Negociacoes, Clientes, ['id','name', 'cpf'])
+        .setIncludesAssociationsAttributes(Negociacoes, Clientes, ['id','name', 'cpf', 'lastname'])
         .setIncludesAssociations(Negociacoes, { model: User, as: 'Vendedor' })
         .setIncludesAssociationsAttributes(Negociacoes, User, ['name'])
         .setIncludesAssociations(Negociacoes, {
