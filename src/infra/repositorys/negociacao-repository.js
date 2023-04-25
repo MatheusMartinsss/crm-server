@@ -1,10 +1,11 @@
 const { Negociacoes, Clientes, User, Tags, Groups } = require('../../models/')
-const groups = require('../../models/groups')
-const { NotFoundError } = require('../../utils/helpers/errors')
 const QuerySequelize = require('../helpers/query-builder')
 
 const create = async (data) => {
     const _Negociacoes = await Negociacoes.create(data)
+    if (data.Cliente) {
+        await _Negociacoes.setCliente(data.Cliente.id)
+    }
     return _Negociacoes
 }
 const findByEmail = async (email) => {
@@ -69,13 +70,12 @@ const findById = async (id) => {
     return _Negociacoes
 }
 
-const updateNegociacao = async (id, body) => {
-    const _Negociacoes = await Negociacoes.update({ ...body }, {
-        where: {
-            id
-        }
-    })
-    return _Negociacoes
+const updateNegociacao = async (negociacao, body) => {
+    await negociacao.update(body)
+    if (body.Cliente) {
+        await negociacao.setCliente(body.Cliente.id)
+    }
+    return
 }
 const removeNegociacao = async (id) => {
     const negociacao = await Negociacoes.destroy({
