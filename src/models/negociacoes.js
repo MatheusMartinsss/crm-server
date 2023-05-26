@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     cliente_id: DataTypes.UUID,
     group_id: DataTypes.INTEGER,
     closeExpect: DataTypes.DATE,
-    tag_id: DataTypes.INTEGER
+    tag_id: DataTypes.INTEGER,
+    finished: DataTypes.BOOLEAN,
+    prioridade: DataTypes.ENUM(['critica', 'alta', 'media', 'baixa', 'minima'])
   }, {
     sequelize,
     tableName: 'negociacoes',
