@@ -7,7 +7,7 @@ module.exports = {
     return queryInterface.bulkInsert('users', [{
       id: uuid.v4(),
       name: 'admin',
-      role: 'admin',
+      role_id: 1,
       password: password,
       email: 'admin@admin.com',
       createdAt: new Date(),

@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, UUID
 } = require('sequelize');
 const { v4 } = require('uuid')
 module.exports = (sequelize, DataTypes) => {
@@ -19,8 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Negociacoes.init({
+    id: {
+      type: UUID,
+      primaryKey: true,
+
+    },
     name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     value: DataTypes.DECIMAL(10, 2),
     vendedor_id: DataTypes.UUID,
     cliente_id: DataTypes.UUID,

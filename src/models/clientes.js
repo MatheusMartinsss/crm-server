@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, UUID
 } = require('sequelize');
 const { v4 } = require('uuid')
 module.exports = (sequelize, DataTypes) => {
@@ -19,14 +19,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Clientes.init({
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+
+    },
     name: DataTypes.STRING,
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,
     phonenumber: DataTypes.STRING,
     cpf: DataTypes.STRING,
-    vendedor_id: DataTypes.UUID,
-    empresa_tamanho: DataTypes.ENUM(['pequena', 'media', 'grande', '']),
-    pessoa_tipo: DataTypes.ENUM(['fisica', 'juridica'])
+    vendedor_id: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'users', key: 'id'
+      }
+    },
+    empresa_tamanho: {
+      allowNull: true,
+      type: DataTypes.ENUM,
+      values: ['pequena', 'media', 'grande', ''],
+      defaultValue: 'pequena'
+    },
+    pessoa_tipo: {
+      allowNull: true,
+      type: DataTypes.ENUM,
+      values: ['fisica', 'juridica'],
+      defaultValue: 'fisica'
+    }
   }, {
     sequelize,
     tableName: 'clientes',

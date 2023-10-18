@@ -1,6 +1,7 @@
 const { Clientes, Location } = require('../../models/')
 const QuerySequelize = require('../helpers/query-builder')
 const create = async (data) => {
+    console.log('teste',data)
     const _cliente = await Clientes.create({
         ...data,
     })

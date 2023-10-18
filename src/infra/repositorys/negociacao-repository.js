@@ -2,11 +2,15 @@ const { Negociacoes, Clientes, User, Tags, Groups } = require('../../models/')
 const QuerySequelize = require('../helpers/query-builder')
 
 const create = async (data) => {
-    const _Negociacoes = await Negociacoes.create(data)
-    if (data.Cliente) {
-        await _Negociacoes.setCliente(data.Cliente.id)
+
+    const result = await Negociacoes.create(data)
+    if (data?.Cliente) {
+        await result.setCliente(data.Cliente.id)
     }
-    return _Negociacoes
+    if (data?.Group) {
+        await result.setGroup(data.Group.id)
+    }
+    return result
 }
 const findByEmail = async (email) => {
     const _Negociacoes = await Negociacoes.findOne({

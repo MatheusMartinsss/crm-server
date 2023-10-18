@@ -11,7 +11,9 @@ module.exports = createUserUseCase = async (user, body) => {
             throw new MissingParamError(requiredFields[field])
         }
     }
+    console.log(user)
     body.vendedor_id = user.id
+    console.log(body)
     const cliente = await create(body)
     return cliente;
 }

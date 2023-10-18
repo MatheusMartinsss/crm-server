@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.11",
     "bcrypt": "5.0.0",
     "cors": "^2.8.5",
+    "dompurify": "^3.0.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "fast-glob": "^3.2.12",
@@ -20,7 +22,7 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.28.0",
+    "sequelize": "^6.29.1",
     "sequelize-cli": "^6.5.2",
     "uuid": "^9.0.0",
     "yup": "^0.32.11"

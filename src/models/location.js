@@ -1,6 +1,6 @@
 'use strict';
 const {
-    Model
+    Model, UUID
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -17,9 +17,18 @@ module.exports = (sequelize, DataTypes) => {
     }
     Location.init({
         estado: DataTypes.STRING,
-        cidade: DataTypes.STRING,
+        cidade: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         uf: DataTypes.STRING,
-        cliente_id: DataTypes.UUID,
+        cliente_id: {
+            allowNull: true,
+            type: UUID,
+            references: {
+                model: 'clientes', key: 'id'
+            }
+        },
 
     }, {
         sequelize,

@@ -11,7 +11,8 @@ module.exports = {
       max: 10
     },
     dialect: 'postgres',
-    logging: true
+    logging: true,
+
   },
   test: {
     username: process.env.DB_USER,
