@@ -29,13 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     phonenumber: DataTypes.STRING,
     cpf: DataTypes.STRING,
-    vendedor_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'users', key: 'id'
-      }
-    },
+    vendedor_id: DataTypes.UUID,
     empresa_tamanho: {
       allowNull: true,
       type: DataTypes.ENUM,
