@@ -79,6 +79,10 @@ const updateNegociacao = async (negociacao, body) => {
     if (body.Cliente) {
         await negociacao.setCliente(body.Cliente.id)
     }
+    if (body.Group) {
+        await negociacao.setGroup(body.Group.id)
+    }
+    
     return
 }
 const removeNegociacao = async (id) => {

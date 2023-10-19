@@ -14,18 +14,19 @@ module.exports = updateNegociacaoUseCase = async (user, id, body) => {
     if (body?.Cliente) {
         await findClienteUseCase(user, body.Cliente.id)
     }
-    if (body?.vendedor_id && user.role != 'admin')
+    if (body?.Vendedor?.id && user.role != 'admin')
         throw new Unauthorized()
 
-    if (body?.vendedor_id) {
-        await findUserUseCase(body.vendedor_id)
+    if (body?.Vendedor) {
+        await findUserUseCase(body.Vendedor.id)
     }
-    if (body?.group_id) {
-        await findGroupByIdUseCase(body.group_id)
+    if (body?.Group) {
+        await findGroupByIdUseCase(body.Group.id)
     }
     if (body?.Tag) {
         await updateTags(_negociacao, body?.Tag?.id)
     }
+    console.log(body)
     await updateNegociacao(_negociacao, body)
 
     const negociacao = await findById(id)
