@@ -25,11 +25,14 @@ const findAll = async (user, query) => {
     if (user.role != 'admin') {
         queryBuilder.setWhere({ vendedor_id: user.id })
     }
-    if (query.cliente_id) {
-        queryBuilder.setWhere({ cliente_id: query.cliente_id })
+    if (query.clienteId) {
+        queryBuilder.setWhere({ cliente_id: query.clienteId })
     }
     if (query.vendedor_id) {
         queryBuilder.setWhere({ vendedor_id: user.id })
+    }
+    if (query.prioridade) {
+        queryBuilder.setWhere({ prioridade: query.prioridade })
     }
     queryBuilder
         .setIncludes([{ model: Clientes, as: 'Cliente' }, { model: User, as: 'Vendedor' }, {
@@ -82,7 +85,7 @@ const updateNegociacao = async (negociacao, body) => {
     if (body.Group) {
         await negociacao.setGroup(body.Group.id)
     }
-    
+
     return
 }
 const removeNegociacao = async (id) => {
